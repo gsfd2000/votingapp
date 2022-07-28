@@ -27,3 +27,23 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: registry.gitlab.com/voting-application/result:v1
+  - target:
+      version: v1
+      kind: Service
+      name: result
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: ClusterIP 
+      - op: remove
+        path: /spec/ports/0/nodePort
+  - target:
+      version: v1
+      kind: Service
+      name: vote
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: ClusterIP
+      - op: remove
+        path: /spec/ports/0/nodePort
