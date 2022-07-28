@@ -51,3 +51,23 @@ patches:
         value: ClusterIP
       - op: remove
         path: /spec/ports/0/nodePort
+  - target:
+      version: v1
+      kind: Service
+      name: result-ui
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: ClusterIP 
+      - op: remove
+        path: /spec/ports/0/nodePort
+  - target:
+      version: v1
+      kind: Service
+      name: vote-ui
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: ClusterIP
+      - op: remove
+        path: /spec/ports/0/nodePort
