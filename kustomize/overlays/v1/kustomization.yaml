@@ -6,6 +6,7 @@ resources:
   - worker-deployment.yaml
   - db-deployment.yaml
   - db-service.yaml
+  - istio-vs.yaml
 patches:
   # Use v1 as image tag for vote Deployment
   - target:

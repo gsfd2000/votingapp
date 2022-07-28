@@ -1,0 +1,43 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app: argo-combined-app-vcluster
+    app.kubernetes.io/instance: argocd
+  name: votingapp-vote-vcluster
+  namespace: vcluster-1
+spec:
+  gateways:
+  - istio-ingress/generic-gateway
+  hosts:
+  - votingapp-vote.argoworkrancher5.172.23.0.2.nip.io
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: vote-x-fleet-kustomize-votingapp-x-vcluster-k8s-123.vcluster-1.svc.cluster.local
+        port:
+          number: 80
+      weight: 100
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    app: argo-combined-app-vcluster
+    app.kubernetes.io/instance: argocd
+  name: votingapp-result-vcluster
+  namespace: vcluster-1
+spec:
+  gateways:
+  - istio-ingress/generic-gateway
+  hosts:
+  - votingapp-result.argoworkrancher5.172.23.0.2.nip.io
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: result-x-fleet-kustomize-votingapp-x-vcluster-k8s-123.vcluster-1.svc.cluster.local
+        port:
+          number: 80
+      weight: 100
